@@ -20,6 +20,7 @@ Route.group( () => {
   Route.post('auth/login', 'UserController.login');
   Route.get('news', 'NewsController.index').middleware('auth');
   Route.post('news', 'NewsController.create').middleware('auth');
+  Route.delete('news/:id', 'NewsController.destroy').middleware('auth');
 })
 .prefix('api');
 
