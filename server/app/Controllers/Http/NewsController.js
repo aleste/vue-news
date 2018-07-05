@@ -33,6 +33,18 @@ class NewsController {
         return news        
     }
 
+    async update({ auth, request, params}) {
+        const user = await auth.getUser()
+        const { id } = params
+        const news = await News.find(id)
+        AuthorizationService.verifyPermission(news, user)
+
+        news.merge(request.only('title'))
+        await news.save()
+        return news        
+    }
+
+
 }
 
 module.exports = NewsController
